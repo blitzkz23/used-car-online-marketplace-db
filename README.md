@@ -47,4 +47,11 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
 ## Establishing Business Rule
 
-Below we are gonna establish business rule that apply to all of the tables that we've created in the ERD.
+| User | City | Product | 
+| --- | --- | --- |
+| This table is used to store user's information | This table is used to store user's city information | This table is used to store detail of product |
+| id | id | brand |
+| first_name | city_name | model |
+| last_name | latitude | body_type |
+| phone | longitude | year |
+| city_id |  | price |

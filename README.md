@@ -51,6 +51,7 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
     Business Rule:
     - All field can't be null
+    - The relationship between city are mandatory to mandatory as user required to fill their data domicile included, and the data in city table can be deleted only if there are no related data in the user table
 
 2. Table: city
 
@@ -60,24 +61,25 @@ After deciding required tables, we can create ER diagram that contain all of tho
 3. Table: advertisement
 
     Business Rule:
-    - Desc field can be null
-    - The relationship between user are mandatory to optional as there are user is only looking or buying and don't put ads.  When user delete their account, respective field on this table are set to null
+    - Desc and updated_at field can be null
+    - The relationship between user are mandatory to optional as there are user is only looking or buying and don't put ads.  When user delete their account, respective field on this table are set to null (meaning the ads will still exist)
     - The relationship between car_product are mandatory to mandatory as product only exist becase its shown on the ads.  The data on the product can be deleted and the respective advertisement will be deleted as well
 
 4. Table: bid
 
     Business Rule:
     - All field can't be null
-    - The relationship between user are mandatory to optional as there are user who don't bid.  When user delete their account, respective field on this table are set to null
+    - The relationship between user are mandatory to optional as there are user who don't bid.  The data on the USER can be deleted and the respective BID will be deleted as well
     - The relationship between advertisement are optional to mandatory as there is ads that don't allow bid.  When an advertisement is deleted, respective data on this table will be deleted as well
 
 5. Table: car_product
 
     Business Rule:
     - Color, and mileage can be null
-    - The relationship between brand, model, and body type are mandatory to mandatory, and the data in those table can be deleted only if there are no related data in the car_product table
     - Price must be > 0
     - Year must be > 1900
+    - The relationship between brand, model, and body type are mandatory to mandatory, and the data in those table can be deleted only if there are no related data in the car_product table
+
 
 6. Table: brand
 

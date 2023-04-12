@@ -34,7 +34,7 @@ In order to design our database, first let's determine what tables are required 
 | city | Store more detailed information of user's city address |
 | advertisement | Store information about product that user want to sell |
 | bid | Store information about user who bid on certain advertisement |
-| car_product | Store information about project accepted by PacProjects |
+| car_product | Store detailed information about car that user want to sell |
 | brand | Store information about product's brand name |
 | model | Store information about product's model name |
 | body_type | Store information about product's body tipe name |
@@ -47,11 +47,46 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
 ## Establishing Business Rule
 
-| User | City | Product | 
-| --- | --- | --- |
-| This table is used to store user's information | This table is used to store user's city information | This table is used to store detail of product |
-| id | id | brand |
-| first_name | city_name | model |
-| last_name | latitude | body_type |
-| phone | longitude | year |
-| city_id |  | price |
+1. Table: user
+
+    Business Rule:
+    - All field can't be null
+
+2. Table: city
+
+    Business Rule:
+    - All field can't be null
+
+3. Table: advertisement
+
+    Business Rule:
+    - Desc field can be null
+    - The relationship between user are mandatory to optional as there are user is only looking or buying and don't put ads.  When user delete their account, respective field on this table are set to null
+    - The relationship between car_product are mandatory to mandatory as product only exist becase its shown on the ads.  The data on the product can be deleted and the respective advertisement will be deleted as well
+
+4. Table: bid
+
+    Business Rule:
+    - All field can't be null
+    - The relationship between user are mandatory to optional as there are user who don't bid.  When user delete their account, respective field on this table are set to null
+    - The relationship between advertisement are optional to mandatory as there is ads that don't allow bid.  When an advertisement is deleted, respective data on this table will be deleted as well
+
+5. Table: car_product
+
+    Business Rule:
+    - Color, and mileage can be null
+    - The relationship between brand, model, and body type are mandatory to mandatory, and the data in those table can be deleted only if there are no related data in the car_product table
+    - Price must be > 0
+    - Year must be > 1900
+
+6. Table: brand
+    Business Rule:
+    - All field can't be null
+
+7. Table: model
+    Business Rule:
+    - All field can't be null
+
+8. Table: body_type
+    Business Rule:
+    - All field can't be null

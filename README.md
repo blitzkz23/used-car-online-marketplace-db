@@ -80,13 +80,16 @@ After deciding required tables, we can create ER diagram that contain all of tho
     - Year must be > 1900
 
 6. Table: brand
+
     Business Rule:
     - All field can't be null
 
 7. Table: model
+
     Business Rule:
     - All field can't be null
 
 8. Table: body_type
+
     Business Rule:
     - All field can't be null

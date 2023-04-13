@@ -1,0 +1,101 @@
+advertisement_id,car_product_id,user_id,title,description,created_at,updated_at,is_active,is_bid_allowed
+1,2,36,Advertisement 0,This is advertisement 0,2023-04-13 17:08:43.732485,,True,True
+2,69,92,Advertisement 1,This is advertisement 1,2023-04-12 17:08:43.732485,2023-04-12 17:08:43.732485,True,True
+3,7,17,Advertisement 2,This is advertisement 2,2023-04-11 17:08:43.732485,2023-04-11 17:08:43.732485,True,True
+4,45,56,Advertisement 3,This is advertisement 3,2023-04-10 17:08:43.732485,,True,True
+5,80,78,Advertisement 4,This is advertisement 4,2023-04-09 17:08:43.732485,2023-04-09 17:08:43.732485,True,True
+6,79,90,Advertisement 5,This is advertisement 5,2023-04-08 17:08:43.732485,,True,True
+7,51,20,Advertisement 6,This is advertisement 6,2023-04-07 17:08:43.732485,,True,True
+8,58,88,Advertisement 7,This is advertisement 7,2023-04-06 17:08:43.732485,,True,True
+9,77,53,Advertisement 8,This is advertisement 8,2023-04-05 17:08:43.732485,2023-04-05 17:08:43.732485,True,True
+10,73,63,Advertisement 9,This is advertisement 9,2023-04-04 17:08:43.732485,,True,True
+11,23,34,Advertisement 10,This is advertisement 10,2023-04-03 17:08:43.732485,,True,True
+12,5,78,Advertisement 11,This is advertisement 11,2023-04-02 17:08:43.732485,,True,True
+13,46,90,Advertisement 12,This is advertisement 12,2023-04-01 17:08:43.732485,2023-04-01 17:08:43.732485,True,True
+14,1,34,Advertisement 13,This is advertisement 13,2023-03-31 17:08:43.732485,2023-03-31 17:08:43.732485,True,True
+15,74,1,Advertisement 14,This is advertisement 14,2023-03-30 17:08:43.732485,,True,True
+16,43,26,Advertisement 15,This is advertisement 15,2023-03-29 17:08:43.732485,,True,True
+17,44,64,Advertisement 16,This is advertisement 16,2023-03-28 17:08:43.732485,,True,True
+18,85,99,Advertisement 17,This is advertisement 17,2023-03-27 17:08:43.732485,2023-03-27 17:08:43.732485,True,True
+19,94,40,Advertisement 18,This is advertisement 18,2023-03-26 17:08:43.732485,,True,True
+20,6,100,Advertisement 19,This is advertisement 19,2023-03-25 17:08:43.732485,2023-03-25 17:08:43.732485,True,True
+21,83,15,Advertisement 20,This is advertisement 20,2023-03-24 17:08:43.732485,2023-03-24 17:08:43.732485,True,True
+22,25,14,Advertisement 21,This is advertisement 21,2023-03-23 17:08:43.732485,,True,True
+23,86,25,Advertisement 22,This is advertisement 22,2023-03-22 17:08:43.732485,,True,True
+24,92,9,Advertisement 23,This is advertisement 23,2023-03-21 17:08:43.732485,,True,True
+25,13,91,Advertisement 24,This is advertisement 24,2023-03-20 17:08:43.732485,,True,True
+26,71,15,Advertisement 25,This is advertisement 25,2023-03-19 17:08:43.732485,,True,True
+27,54,90,Advertisement 26,This is advertisement 26,2023-03-18 17:08:43.732485,,True,True
+28,98,57,Advertisement 27,This is advertisement 27,2023-03-17 17:08:43.732485,,True,True
+29,90,76,Advertisement 28,This is advertisement 28,2023-03-16 17:08:43.732485,2023-03-16 17:08:43.732485,True,True
+30,60,14,Advertisement 29,This is advertisement 29,2023-03-15 17:08:43.732485,,True,True
+31,24,45,Advertisement 30,This is advertisement 30,2023-03-14 17:08:43.732485,2023-03-14 17:08:43.732485,True,True
+32,95,23,Advertisement 31,This is advertisement 31,2023-03-13 17:08:43.732485,2023-03-13 17:08:43.732485,True,True
+33,67,13,Advertisement 32,This is advertisement 32,2023-03-12 17:08:43.732485,,True,True
+34,81,53,Advertisement 33,This is advertisement 33,2023-03-11 17:08:43.732485,,True,True
+35,63,95,Advertisement 34,This is advertisement 34,2023-03-10 17:08:43.732485,2023-03-10 17:08:43.732485,True,True
+36,33,39,Advertisement 35,This is advertisement 35,2023-03-09 17:08:43.732485,,True,True
+37,20,87,Advertisement 36,This is advertisement 36,2023-03-08 17:08:43.732485,,True,True
+38,56,41,Advertisement 37,This is advertisement 37,2023-03-07 17:08:43.732485,2023-03-07 17:08:43.732485,True,True
+39,21,76,Advertisement 38,This is advertisement 38,2023-03-06 17:08:43.732485,2023-03-06 17:08:43.732485,True,True
+40,89,83,Advertisement 39,This is advertisement 39,2023-03-05 17:08:43.732485,2023-03-05 17:08:43.732485,True,True
+41,27,36,Advertisement 40,This is advertisement 40,2023-03-04 17:08:43.732485,,True,True
+42,29,55,Advertisement 41,This is advertisement 41,2023-03-03 17:08:43.732485,,True,True
+43,26,9,Advertisement 42,This is advertisement 42,2023-03-02 17:08:43.732485,2023-03-02 17:08:43.732485,True,True
+44,12,77,Advertisement 43,This is advertisement 43,2023-03-01 17:08:43.732485,,True,True
+45,9,75,Advertisement 44,This is advertisement 44,2023-02-28 17:08:43.732485,2023-02-28 17:08:43.732485,True,True
+46,64,84,Advertisement 45,This is advertisement 45,2023-02-27 17:08:43.732485,2023-02-27 17:08:43.732485,True,True
+47,55,80,Advertisement 46,This is advertisement 46,2023-02-26 17:08:43.732485,,True,True
+48,72,34,Advertisement 47,This is advertisement 47,2023-02-25 17:08:43.732485,,True,True
+49,99,38,Advertisement 48,This is advertisement 48,2023-02-24 17:08:43.732485,2023-02-24 17:08:43.732485,True,True
+50,48,73,Advertisement 49,This is advertisement 49,2023-02-23 17:08:43.732485,,True,True
+51,50,3,Advertisement 50,This is advertisement 50,2023-02-22 17:08:43.732485,2023-02-22 17:08:43.732485,True,True
+52,97,95,Advertisement 51,This is advertisement 51,2023-02-21 17:08:43.732485,,True,True
+53,62,15,Advertisement 52,This is advertisement 52,2023-02-20 17:08:43.732485,2023-02-20 17:08:43.732485,True,True
+54,40,83,Advertisement 53,This is advertisement 53,2023-02-19 17:08:43.732485,2023-02-19 17:08:43.732485,True,True
+55,15,75,Advertisement 54,This is advertisement 54,2023-02-18 17:08:43.732485,2023-02-18 17:08:43.732485,True,True
+56,49,62,Advertisement 55,This is advertisement 55,2023-02-17 17:08:43.732485,,True,True
+57,42,9,Advertisement 56,This is advertisement 56,2023-02-16 17:08:43.732485,2023-02-16 17:08:43.732485,True,True
+58,75,14,Advertisement 57,This is advertisement 57,2023-02-15 17:08:43.732485,,True,True
+59,82,32,Advertisement 58,This is advertisement 58,2023-02-14 17:08:43.732485,2023-02-14 17:08:43.732485,True,True
+60,11,17,Advertisement 59,This is advertisement 59,2023-02-13 17:08:43.732485,2023-02-13 17:08:43.732485,True,True
+61,61,63,Advertisement 60,This is advertisement 60,2023-02-12 17:08:43.732485,,True,True
+62,37,44,Advertisement 61,This is advertisement 61,2023-02-11 17:08:43.732485,2023-02-11 17:08:43.732485,True,True
+63,39,56,Advertisement 62,This is advertisement 62,2023-02-10 17:08:43.732485,2023-02-10 17:08:43.732485,True,True
+64,87,73,Advertisement 63,This is advertisement 63,2023-02-09 17:08:43.732485,,True,True
+65,3,3,Advertisement 64,This is advertisement 64,2023-02-08 17:08:43.732485,2023-02-08 17:08:43.732485,True,True
+66,88,69,Advertisement 65,This is advertisement 65,2023-02-07 17:08:43.732485,,True,True
+67,10,29,Advertisement 66,This is advertisement 66,2023-02-06 17:08:43.732485,2023-02-06 17:08:43.732485,True,True
+68,18,94,Advertisement 67,This is advertisement 67,2023-02-05 17:08:43.732485,2023-02-05 17:08:43.732485,True,True
+69,65,39,Advertisement 68,This is advertisement 68,2023-02-04 17:08:43.732485,2023-02-04 17:08:43.732485,True,True
+70,52,26,Advertisement 69,This is advertisement 69,2023-02-03 17:08:43.732485,,True,True
+71,100,30,Advertisement 70,This is advertisement 70,2023-02-02 17:08:43.732485,2023-02-02 17:08:43.732485,True,True
+72,8,31,Advertisement 71,This is advertisement 71,2023-02-01 17:08:43.732485,2023-02-01 17:08:43.732485,True,True
+73,76,11,Advertisement 72,This is advertisement 72,2023-01-31 17:08:43.732485,2023-01-31 17:08:43.732485,True,True
+74,96,59,Advertisement 73,This is advertisement 73,2023-01-30 17:08:43.732485,2023-01-30 17:08:43.732485,True,True
+75,47,77,Advertisement 74,This is advertisement 74,2023-01-29 17:08:43.732485,2023-01-29 17:08:43.732485,True,True
+76,19,23,Advertisement 75,This is advertisement 75,2023-01-28 17:08:43.732485,2023-01-28 17:08:43.732485,True,True
+77,70,76,Advertisement 76,This is advertisement 76,2023-01-27 17:08:43.732485,2023-01-27 17:08:43.732485,True,True
+78,16,2,Advertisement 77,This is advertisement 77,2023-01-26 17:08:43.732485,2023-01-26 17:08:43.732485,True,True
+79,17,43,Advertisement 78,This is advertisement 78,2023-01-25 17:08:43.732485,2023-01-25 17:08:43.732485,True,True
+80,66,63,Advertisement 79,This is advertisement 79,2023-01-24 17:08:43.732485,2023-01-24 17:08:43.732485,True,True
+81,34,41,Advertisement 80,This is advertisement 80,2023-01-23 17:08:43.732485,,True,True
+82,31,16,Advertisement 81,This is advertisement 81,2023-01-22 17:08:43.732485,2023-01-22 17:08:43.732485,True,True
+83,68,71,Advertisement 82,This is advertisement 82,2023-01-21 17:08:43.732485,,True,True
+84,32,62,Advertisement 83,This is advertisement 83,2023-01-20 17:08:43.732485,,True,True
+85,57,4,Advertisement 84,This is advertisement 84,2023-01-19 17:08:43.732485,,True,True
+86,30,14,Advertisement 85,This is advertisement 85,2023-01-18 17:08:43.732485,2023-01-18 17:08:43.732485,True,True
+87,4,78,Advertisement 86,This is advertisement 86,2023-01-17 17:08:43.732485,2023-01-17 17:08:43.732485,True,True
+88,93,56,Advertisement 87,This is advertisement 87,2023-01-16 17:08:43.732485,2023-01-16 17:08:43.732485,True,True
+89,22,33,Advertisement 88,This is advertisement 88,2023-01-15 17:08:43.732485,,True,True
+90,35,91,Advertisement 89,This is advertisement 89,2023-01-14 17:08:43.732485,,True,True
+91,53,21,Advertisement 90,This is advertisement 90,2023-01-13 17:08:43.732485,2023-01-13 17:08:43.732485,True,True
+92,36,39,Advertisement 91,This is advertisement 91,2023-01-12 17:08:43.732485,,True,True
+93,78,41,Advertisement 92,This is advertisement 92,2023-01-11 17:08:43.732485,2023-01-11 17:08:43.732485,True,True
+94,84,28,Advertisement 93,This is advertisement 93,2023-01-10 17:08:43.732485,2023-01-10 17:08:43.732485,True,True
+95,14,37,Advertisement 94,This is advertisement 94,2023-01-09 17:08:43.732485,,True,True
+96,41,20,Advertisement 95,This is advertisement 95,2023-01-08 17:08:43.732485,2023-01-08 17:08:43.732485,True,True
+97,91,67,Advertisement 96,This is advertisement 96,2023-01-07 17:08:43.732485,2023-01-07 17:08:43.732485,True,True
+98,59,36,Advertisement 97,This is advertisement 97,2023-01-06 17:08:43.732485,2023-01-06 17:08:43.732485,True,True
+99,38,15,Advertisement 98,This is advertisement 98,2023-01-05 17:08:43.732485,2023-01-05 17:08:43.732485,True,True
+100,28,40,Advertisement 99,This is advertisement 99,2023-01-04 17:08:43.732485,2023-01-04 17:08:43.732485,True,True

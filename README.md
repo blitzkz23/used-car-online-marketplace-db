@@ -69,6 +69,7 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
     Business Rule:
     - All field can't be null
+    - Bid status value mus be in: Sent or Cancelled
     - The relationship between user are mandatory to optional as there are user who don't bid.  The data on the USER can be deleted and the respective BID will be deleted as well
     - The relationship between advertisement are optional to mandatory as there is ads that don't allow bid.  When an advertisement is deleted, respective data on this table will be deleted as well
 

@@ -1,13 +1,13 @@
 -- Used Car Marketplace Db
 
 CREATE TABLE city(
-    city_id SERIAL PRIMARY KEY,
+    city_id INTEGER PRIMARY KEY,
     city_name VARCHAR(60) NOT NULL,
-    latitude NUMERIC(10, 8) NOT NULL,
-    longitude NUMERIC(10, 8) NOT NULL
+    latitude DOUBLE PRECISION NOT NULL,
+    longitude DOUBLE PRECISION NOT NULL
 );
 
-CREATE TABLE user(
+CREATE TABLE "user"(
     user_id SERIAL PRIMARY KEY,
     city_id INTEGER NOT NULL,
     first_name VARCHAR(80) NOT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE car_product(
     year INTEGER NOT NULL,
     price INTEGER NOT NULL,
     color VARCHAR(60),
-    mileage INTEGER
+    mileage INTEGER,
     CONSTRAINT fk_car_brand
         FOREIGN KEY(brand_id)
         REFERENCES brand(brand_id)
@@ -65,18 +65,18 @@ CREATE TABLE advertisement(
     car_product_id INTEGER NOT NULL,
     user_id INTEGER NOT NULL,
     title VARCHAR(100) NOT NULL,
-    desc TEXT,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME,
+    "desc" TEXT,
+    created_at TIMESTAMP NOT NULL,
+    updated_at TIMESTAMP,
     is_active BOOLEAN NOT NULL,
-    is_bid_allowed BOLLEAN NOT NULL,
+    is_bid_allowed BOOLEAN NOT NULL,
     CONSTRAINT fk_advertised_product
         FOREIGN KEY(car_product_id)
         REFERENCES car_product(car_product_id)
         ON DELETE CASCADE,
     CONSTRAINT fk_advertisement_owner
         FOREIGN KEY(user_id)
-        REFERENCES user(user_id)
+        REFERENCES "user"(user_id)
         ON DELETE SET NULL
 );
 
@@ -84,16 +84,39 @@ CREATE TABLE bid(
     bid_id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL,
     advertisement_id INTEGER NOT NULL,
-    bid_date DATETIME NOT NULL,
+    bid_date TIMESTAMP NOT NULL,
     bid_price INTEGER NOT NULL,
     bid_status VARCHAR(20),
     CONSTRAINT fk_bidding_user
         FOREIGN KEY(user_id)
-        REFERENCES user(user_id)
+        REFERENCES "user"(user_id)
         ON DELETE CASCADE,
     CONSTRAINT fk_bid_on_advertisement
-        FOREIGN KEY(advertisement_id),
-        REFERENCES advertisement(advertisement_id),
-        CHECK (advertisement.is_allow_bid = true),
+        FOREIGN KEY(advertisement_id)
+        REFERENCES advertisement(advertisement_id)
         ON DELETE CASCADE
 );
+
+ALTER TABLE bid 
+ADD CONSTRAINT chk_bid_status CHECK (bid_status IN ('Sent', 'Cancelled'));
+
+
+-- Create function and trigger to check advertisement allow bid or not, before insertion
+CREATE OR REPLACE FUNCTION check_advertisement_bid()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM advertisement
+        WHERE advertisement_id = NEW.advertisement_id
+        AND is_allow_bid = true
+    ) THEN
+        RAISE EXCEPTION 'Advertisement does not allow bids.';
+    END IF;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER check_advertisement_bid_trigger
+BEFORE INSERT OR UPDATE ON bid
+FOR EACH ROW
+EXECUTE FUNCTION check_advertisement_bid();

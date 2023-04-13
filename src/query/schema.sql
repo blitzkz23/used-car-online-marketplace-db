@@ -34,7 +34,7 @@ CREATE TABLE model(
 
 CREATE TABLE body_type(
     body_type_id SERIAL PRIMARY KEY,
-    boty_type_name VARCHAR(60)
+    body_type_name VARCHAR(60)
 );
 
 CREATE TABLE car_product(
@@ -108,7 +108,7 @@ BEGIN
     IF NOT EXISTS (
         SELECT 1 FROM advertisement
         WHERE advertisement_id = NEW.advertisement_id
-        AND is_allow_bid = true
+        AND is_bid_allowed = true
     ) THEN
         RAISE EXCEPTION 'Advertisement does not allow bids.';
     END IF;

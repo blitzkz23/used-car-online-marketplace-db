@@ -13,7 +13,7 @@ For more details, here are the features and limitations of this project:
 3. Users offer their products through advertisements that will be displayed on the website.
 4. This ad contains a title, detailed product information offered, and seller contact.
 5. Some of the information that must be written in the ad is as follows
-    - car brand: Toyota, Daihatsu, Honda, etc
+    - Car brand: Toyota, Daihatsu, Honda, etc
     - Model: Toyota Camry, Toyota Corolla Altis, Toyota Vios,Toyota Camry Hybrid, etc
     - Car body type: MPV, SUV, Van, Sedan, Hatchback, etc
     - Car type: manual or automatic
@@ -43,7 +43,7 @@ In order to design our database, first let's determine what tables are required 
 
 After deciding required tables, we can create ER diagram that contain all of those table, relationship between them, field for each table, and primary-foreign key that are needed for this database.
 
-![](erd/used-car-marketplace.png)
+![](doc/erd/used-car-marketplace.png)
 
 ## Establishing Business Rule
 
@@ -81,7 +81,6 @@ After deciding required tables, we can create ER diagram that contain all of tho
     - Year must be > 1900
     - The relationship between brand, model, and body type are mandatory to mandatory, and the data in those table can be deleted only if there are no related data in the car_product table
 
-
 6. Table: brand
 
     Business Rule:
@@ -96,3 +95,23 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
     Business Rule:
     - All field can't be null
+
+## Transactional Query Example
+
+1. Find car with release date of 2015 and above
+
+```
+SELECT 
+    product_id,
+    brand_name,
+    model_name,
+    year,
+    price
+FROM car_product as cp
+JOIN brand as b
+    ON b.id = cp.brand_id
+JOIN model as m
+    ON m.id = cp.model_id
+WHERE
+    year >= 2015
+```

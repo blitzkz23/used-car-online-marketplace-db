@@ -129,7 +129,7 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
     INSERT INTO bid(user_id, advertisement_id , bid_date, bid_price, bid_status)
     VALUES(96, 69, '2023-04-10 17:09:05.000', 230000000, 'Sent');
-    ``
+    ```
 
     Output:
 

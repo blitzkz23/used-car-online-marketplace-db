@@ -100,18 +100,136 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
 1. Find car with release date of 2015 and above
 
-```
-SELECT 
-    product_id,
-    brand_name,
-    model_name,
-    year,
-    price
-FROM car_product as cp
-JOIN brand as b
-    ON b.id = cp.brand_id
-JOIN model as m
-    ON m.id = cp.model_id
-WHERE
-    year >= 2015
-```
+    ```
+    SELECT 
+        car_product_id,
+        brand_name,
+        model_name,
+        year,
+        price
+    FROM car_product as cp
+    JOIN brand as b
+        ON b.brand_id = cp.brand_id
+    JOIN model as m
+        ON m.model_id = cp.model_id
+    WHERE
+        year >= 2015
+    ```
+
+    Output:
+
+    ![](doc/trx_output/1.png)
+
+2. Input new bid record
+
+    ```
+    # In case the query didn't immediately work because the table have been inserted with dummy data previously
+    SELECT setval(pg_get_serial_sequence('bid', 'bid_id'), coalesce(max(bid_id),0)+1, false) FROM bid;
+
+
+    INSERT INTO bid(user_id, advertisement_id , bid_date, bid_price, bid_status)
+    VALUES(96, 69, '2023-04-10 17:09:05.000', 230000000, 'Sent');
+    ``
+
+    Output:
+
+    Output:
+
+    Before:
+
+    ![](doc/trx_output/2-before.png)
+
+    After:
+
+    ![](doc/trx_output/2-after.png)
+
+3. See cars that are sold by Opung Sihotang by newest date
+
+    ```
+    SELECT 
+        cp.car_product_id,
+        brand_name,
+        model_name,
+        year,
+        price,
+        created_at,
+        concat(first_name, ' ', last_name) AS seller_name 
+    FROM advertisement a  
+    JOIN car_product cp 
+        ON a.car_product_id = cp.car_product_id 
+    JOIN "user" u 
+        ON a.user_id = u.user_id 
+    JOIN brand b 
+        ON b.brand_id = cp.brand_id 
+    JOIN model m 
+        ON m.model_id = cp.model_id 
+    WHERE first_name = 'Opung' AND last_name = 'Sihotang'
+    ORDER BY created_at DESC
+    ```
+
+    Output:
+
+    ![](doc/trx_output/3.png)
+
+4. See cars with 'Yaris' model sort by cheapest
+
+    ```
+    SELECT 
+        cp.car_product_id,
+        brand_name,
+        model_name,
+        year,
+        price
+    FROM advertisement a 
+    JOIN car_product cp 
+        ON cp.car_product_id = a.car_product_id 
+    JOIN brand b 
+        ON b.brand_id  = cp.brand_id 
+    JOIN model m 
+        ON m.model_id  = cp.model_id
+    WHERE model_name = 'Toyota Yaris'
+    ORDER BY price ASC;
+    ```
+
+    Output:
+
+    ![](doc/trx_output/4.png)
+
+5. Looking for the nearest used car based on a city id 3173, the shortest distance is calculated based on latitude longitude. Distance calculations can be calculated using the euclidean distance formula based on latitude and longitude.
+    
+    ```
+    -- Create euclidean distance fun
+    CREATE OR REPLACE FUNCTION euclidean_distance(lat1 double precision, lon1 double precision, lat2 double precision, lon2 double precision)
+    RETURNS double precision
+    AS $$
+    BEGIN
+    RETURN sqrt((lat1 - lat2) ^ 2 + (lon1 - lon2) ^ 2);
+    END;
+    $$ LANGUAGE plpgsql;
+
+    -- Where city id 3171(-6.186486, 106.834091)
+    SELECT 
+        cp.car_product_id,
+        brand_name,
+        model_name,
+        year,
+        price,
+        city_name,
+        euclidean_distance(c.latitude, c.longitude, -6.186486, 106.834091) as distance
+    FROM advertisement a 
+    JOIN car_product cp 
+        ON cp.car_product_id = a.car_product_id 
+    JOIN brand b 
+        ON b.brand_id  = cp.brand_id 
+    JOIN model m 
+        ON m.model_id  = cp.model_id
+    JOIN "user" u 
+        ON u.user_id = a.user_id 
+    JOIN city c 
+        ON c.city_id = u.city_id
+    WHERE euclidean_distance(c.latitude, c.longitude, -6.186486, 106.834091) = 0;
+    ```
+
+    Output:
+
+    ![](doc/trx_output/3.png)

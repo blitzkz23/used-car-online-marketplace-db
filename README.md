@@ -133,8 +133,6 @@ After deciding required tables, we can create ER diagram that contain all of tho
 
     Output:
 
-    Output:
-
     Before:
 
     ![](doc/trx_output/2-before.png)
@@ -233,3 +231,205 @@ After deciding required tables, we can create ER diagram that contain all of tho
     Output:
 
     ![](doc/trx_output/3.png)
+
+## Analitical Query Example
+
+1. Car model popularity rank based on the count number of bid
+
+    ```
+    SELECT 
+        model_name,
+        count(*) AS product_count,
+        count(bid_id) AS count_bid
+    FROM 
+        advertisement a  
+    LEFT JOIN bid b 
+        ON a.advertisement_id = b.advertisement_id 
+    JOIN car_product cp 
+        ON a.car_product_id  = cp.car_product_id 
+    JOIN model m 
+        ON cp.model_id = m.model_id 
+    GROUP BY model_name
+    ORDER BY count_bid desc
+    ```
+
+    Output:
+
+    ![](doc/trx_output/6.png)
+
+2. Compare average price of car brand and model by city
+    ```
+    SELECT 
+        city_name,
+        brand_name,
+        model_name,
+        AVG(price) AS avg_car_city 
+    FROM 
+        advertisement a 
+    JOIN "user" u 
+        ON a.user_id = u.user_id 
+    JOIN city c 
+        ON u.city_id = c.city_id 
+    JOIN car_product cp 
+        ON cp.car_product_id = a.car_product_id 
+    JOIN model m 
+        ON m.model_id = cp.model_id 
+    JOIN brand b 
+        ON b.brand_id = cp.brand_id
+    GROUP BY city_name, brand_name, model_name;
+    ```
+
+    Output:
+
+    ![](doc/trx_output/7.png)
+
+3. From advertisement of a car, compare bid_date bid_price and the next bid date and price of users
+
+    ```
+    WITH next_bid AS (
+        SELECT 
+            user_id,
+            bid_date,
+            bid_price,
+            LEAD(bid_date) OVER (PARTITION BY user_id ORDER BY bid_date) AS next_bid_date,
+            LEAD(bid_price) OVER (PARTITION BY user_id ORDER BY bid_date) AS next_bid_price
+        FROM bid
+    )
+    SELECT 
+        model_name,
+        u.user_id,
+        b.bid_date,
+        b.bid_price,
+        next_bid.next_bid_date AS next_bid_date,
+        next_bid.next_bid_price AS next_bid_price
+    FROM 
+        advertisement a 
+    JOIN "user" u 
+        ON a.user_id = u.user_id 
+    JOIN bid b 
+        ON a.advertisement_id = b.advertisement_id 
+    JOIN car_product cp 
+        ON cp.car_product_id = a.car_product_id 
+    JOIN model m 
+        ON m.model_id = cp.model_id 
+    LEFT JOIN next_bid 
+        ON b.user_id = next_bid.user_id 
+        AND b.bid_date = next_bid.bid_date 
+        AND b.bid_price = next_bid.bid_price;
+    ```
+
+    In this query, the CTE named next_bid calculates the next bid date and bid price for each user using the LEAD() window function. The LEAD() function retrieves the next row's value based on a specified order, and the OVER() clause partitions the data by user ID and orders it by bid date.
+
+    Output:
+
+    ![](doc/trx_output/8.png)
+
+4. Comparing the percentage difference in the average car price by model and the average bid price offered by customers in the last 6 days 
+    - Difference is the difference between the average price of a car model (avg_price) and the average bid price offered for that model (avg_bid_6days)
+    - The difference can be negative or positive
+    - Difference_percent is the percentage of the difference that has been calculated, namely by means of the difference divided by the average price of the car model (avg_price) multiplied by 100%
+    - Difference_percent can be negative or positive
+    In the question stated for months but my generated data dont have span of months, so I used days.
+
+    ```
+    -- CTE 6 days
+    WITH avg_6_days AS (
+        SELECT 
+            model_name,
+            ROUND(AVG(price)) AS avg_6_price
+        FROM 
+            advertisement a 
+        JOIN "user" u 
+            ON a.user_id = u.user_id 
+        JOIN bid b 
+            ON a.advertisement_id = b.advertisement_id 
+        JOIN car_product cp 
+            ON cp.car_product_id = a.car_product_id 
+        JOIN model m 
+            ON m.model_id = cp.model_id
+        WHERE 
+            b.bid_date >= DATE_TRUNC('days', CURRENT_DATE - INTERVAL '6 days')
+        GROUP BY 
+            model_name
+    ),
+    -- CTE overall avg
+    current_avg AS (
+        SELECT 
+            model_name,
+            ROUND(AVG(price)) AS current_avg_price
+        FROM 
+            advertisement a 
+        JOIN "user" u 
+            ON a.user_id = u.user_id 
+        JOIN bid b 
+            ON a.advertisement_id = b.advertisement_id 
+        JOIN car_product cp 
+            ON cp.car_product_id = a.car_product_id 
+        JOIN model m 
+            ON m.model_id = cp.model_id
+        GROUP BY 
+            model_name
+    )
+    SELECT 
+        c.model_name,
+        c.current_avg_price,
+        COALESCE(a.avg_6_price, 0) AS avg_6_price,
+        c.current_avg_price - COALESCE(a.avg_6_price, 0) AS difference,
+        CASE 
+            WHEN COALESCE(a.avg_6_price, 0) = 0 THEN 0 
+            ELSE (c.current_avg_price - COALESCE(a.avg_6_price, 0)) / COALESCE(a.avg_6_price, 0) * 100
+        END AS difference_percent
+    FROM 
+        current_avg c 
+    LEFT JOIN 
+        avg_6_days a 
+        ON c.model_name = a.model_name;
+    ```
+
+    Output:
+
+    ![](doc/trx_output/9.png)
+
+5. Create a window function of the average bid price of a car brand and model for the last 6 days.  In the question stated for months but my generated data dont have span of months, so I used days.
+
+    ```
+    SELECT 
+        model_name,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 1 THEN price END)), 0) AS d_min_1,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 2 THEN price END)), 0) AS d_min_2,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 3 THEN price END)), 0) AS d_min_3,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 4 THEN price END)), 0) AS d_min_4,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 5 THEN price END)), 0) AS d_min_5,
+        COALESCE(ROUND(AVG(CASE WHEN rank = 6 THEN price END)), 0) AS d_min_6
+    FROM (
+        SELECT 
+            model_name,
+            price,
+            RANK() OVER (
+                PARTITION BY model_name
+                ORDER BY date_trunc('day', bid_date) DESC
+            ) AS rank
+        FROM 
+            advertisement a 
+        JOIN "user" u 
+            ON a.user_id = u.user_id 
+        JOIN bid b 
+            ON a.advertisement_id = b.advertisement_id 
+        JOIN car_product cp 
+            ON cp.car_product_id = a.car_product_id 
+        JOIN model m 
+            ON m.model_id = cp.model_id
+        WHERE 
+            bid_date >= DATE_TRUNC('day', CURRENT_DATE - INTERVAL '6 months')
+        GROUP BY 
+            model_name, 
+            date_trunc('day', bid_date), 
+            price
+    ) t
+    GROUP BY 
+        model_name;
+    ```
+
+    Output:
+
+    ![](doc/trx_output/10.png)
